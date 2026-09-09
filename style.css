@@ -1,7 +1,7 @@
 *{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
   background-color: #0D0D0D;
   width: 100%;
   max-width: 1130px;
-  height: 650px;
+  min-height: 650px; 
   border-radius: 40px;
   display: flex;
   position: relative;
@@ -63,7 +63,6 @@ body {
   color: #3A66ED;
   font-weight: 700;
 }
-
 
 /* ----- Redes -----*/
 
@@ -113,7 +112,6 @@ body {
 .card-img {
   flex: 1;
   position: relative;
-  height: 100%;
 }
 
 .formas {
@@ -139,62 +137,70 @@ body {
 
 /* ----- Responsive ----- */
 
-@media (max-width: 768px) {
+@media (max-width: 1130px) {
   body {
-    padding: 15px;
+    padding: 12px;
   }
 
   .card-contenedor {
     flex-direction: column;
+    min-height: auto;
     height: auto;
+    max-width: 440px;
     border-radius: 36px;
-    align-items: center;
+    margin: 0 auto;
   }
 
   .card-contenido {
-    flex: none; 
-    padding: 40px 24px 20px 24px;
+    flex: none;
+    padding: 48px 36px 24px 36px; 
     width: 100%;
     align-items: center;
-    text-align: center;
   }
 
   .titulo {
-    font-size: 45px;
-    line-height: 1;
-    margin-bottom: 25px;
+    width: 100%;
+    font-size: 52px;
+    line-height: 0.95;
+    margin-bottom: 32px;
     text-align: center;
   }
 
   .parrafo {
     width: 100%;
-    max-width: 250px;
-    margin: 0 10px 25px 10px;
-    font-size: 17px;
-    line-height: 1.3;
-    text-align: left;
+    max-width: 330px; 
+    font-size: 14.5px;
+    line-height: 1.45;
+    margin-bottom: 28px;
+    text-align: left; 
   }
 
   .contacto {
-    align-items: flex-start;
-    gap: 10px;
     width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
+    max-width: 330px; 
+    align-items: flex-start;
+    gap: 12px;
   }
 
   .contacto li a {
-    font-size: 13px;
+    font-size: 13.5px;
+  }
+
+  .icon-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    font-size: 12px;
   }
 
   .card-img {
-    flex: none; 
-    height: 340px;
+    flex: none;
     width: 100%;
+    height: 380px;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    position: relative;
     overflow: hidden;
   }
 
@@ -202,29 +208,40 @@ body {
     position: absolute;
     right: auto;
     left: 50%;
-    transform: translateX(-50%);
+    top: auto;
     bottom: 20px;
-    width: 290px;
+    transform: translateX(-50%);
+    width: 320px;
+    max-width: 90%;
+    height: auto;
   }
 
   .avatar {
     position: absolute;
     right: auto;
     left: 50%;
-    transform: translateX(-50%);
     bottom: 0;
-    height: 95%;
-    max-height: 320px;
+    transform: translateX(-50%);
+    height: 94%;
+    max-height: 360px;
+    width: auto;
+    object-fit: contain;
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 400px) {
   .card-contenido {
-    padding: 35px 18px 15px 18px;
+    padding: 38px 24px 20px 24px;
   }
 
   .titulo {
-    font-size: 37px;
+    font-size: 44px;
+    margin-bottom: 24px;
+  }
+
+  .parrafo,
+  .contacto {
+    max-width: 280px;
   }
 
   .parrafo {
@@ -232,19 +249,14 @@ body {
   }
 
   .contacto li a {
-    font-size: 12px;
+    font-size: 12.5px;
   }
 
   .card-img {
-    height: 290px;
+    height: 320px;
   }
 
   .formas {
-    width: 240px;
-    bottom: 15px;
-  }
-
-  .avatar {
-    height: 90%;
+    width: 270px;
   }
 }
