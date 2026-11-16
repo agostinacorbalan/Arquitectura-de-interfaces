@@ -1,0 +1,1336 @@
+/* Biblioteca Popular Sarmiento 
+
+   --------------------------------------------------------------------------
+   Índice
+     1. Variables de diseño (:root)
+     2. Base y reset
+     3. Utilidades
+     4. Átomos
+     5. Moléculas
+     6. Organismos
+     7. Layout: grilla de 12 columnas (mobile-first)
+     8. Tablet  (min-width: 48em  = 768px)
+     9. Desktop (min-width: 64em  = 1024px, probado en 1280px)
+    10. Preferencias del usuario (movimiento reducido)
+
+   1. VARIABLES DE DISEÑO
+   ========================================================================== */
+:root {
+  --color-primario: #D84D26;
+  --color-secundario: #EEDCC6;
+  --color-texto-base: #101010;
+  --color-fondo: #FFFFFF;
+  --color-neutro-claro: #E5E5E5;
+  --color-neutro-medio: #666666;
+  --color-borde: #B3B3B3;         
+  --color-borde-fuerte: #999999;  /* líneas entre actividades */
+  --color-overlay: rgba(16, 16, 16, 0.72); 
+
+  /* Tipografía */
+  --fuente-base: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --texto-pequeno: 0.75rem;   /* 12px */
+  --texto-base: 1rem;         /* 16px */
+  --texto-mediano: 14px;      /* etiquetas, horarios, insignias */
+  --texto-intermedio: 18px;   /* botones y texto de voluntariado */
+  --texto-secundario: 1.25rem;/* 20px */
+  --texto-grande: 2rem;       /* 32px */
+  --texto-display: 3.125rem;  /* 50px */
+  --peso-regular: 400;
+  --peso-medium: 500;
+  --peso-bold: 700;
+  --peso-extrabold: 800;
+  --interlineado-base: 1.5;
+  --interlineado-titulo: 1.1;
+  --interlineado-compacto: 1.2; /* párrafos de la sección Nosotros en desktop */
+
+  /* Espaciado */
+  --espacio-xs: 0.3125rem;    /* 5px  */
+  --espacio-sm: 0.9375rem;    /* 15px */
+  --espacio-md: 1.25rem;      /* 20px */
+  --espacio-lg: 2.5rem;       /* 40px */
+  --espacio-80px: 5rem;         /* 80px — separación entre secciones */
+  --espacio-10px: 10px;
+  --espacio-30px: 30px;
+  --espacio-45px: 45px;
+  --espacio-60px: 60px;
+  --espacio-70px: 70px;         /* margen lateral del contenedor en desktop */
+
+  /* Tokens de apoyo (no están en la Etapa 2; se declaran acá para no
+     escribir valores sueltos en el resto del CSS) */
+  --borde: 1px;
+  --radio-sm: 0.375rem;
+  --radio-control: 10px;      /* botones y campos en desktop */
+  --radio-lg: 20px;           /* tarjetas de talleres y formulario en desktop */
+  --radio-md: 0.75rem;
+  --radio-pill: 62.5rem;
+  --ancho-maximo: 1440px;     /* ancho del contenedor central (el frame de tu diseño desktop) */
+  --alto-hero: 26rem;
+  --ancho-fecha: 5rem;
+  --alto-campo-mensaje: 7.5rem;
+  --alto-hero-desktop: 516px;
+  --alto-encabezado: 58px;
+  --alto-boton: 42px;
+  --alto-campo: 44px;
+  --alto-campo-mensaje-desktop: 164px;
+  --alto-fila-actividad: 80px;
+  --alto-logo-pie: 70px;
+  --ancho-texto-hero: 430px;
+  --ancho-columna-afiche: 409px;  /* 394px de afiche + 15px de sombra */
+  --ancho-formulario: 592px;
+  --subida-afiche: -26px;         /* el afiche sobresale por arriba del listado */
+  --solape-galeria: -38px;        /* cuánto se montan las dos fotos de Nosotros */
+  --tamano-icono: 2rem;
+  --tamano-red: 1.5rem;       /* íconos de redes sociales */
+  --alto-logo: 2.5rem;        /* logo BPS */
+  --tamano-boton-subir: 48px; /* botón circular "volver arriba" */
+  --tamano-check: 164px;          /* círculo con tilde del mensaje de confirmación */
+  --alto-confirmacion: 524px;     /* alto del mensaje en desktop (igual al del formulario) */
+  --ancho-texto-confirmacion: 400px;
+  --transicion: 150ms ease;
+}
+
+
+/* BASE Y RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--espacio-80px);
+}
+
+body {
+  margin: 0;
+  font-family: var(--fuente-base);
+  font-size: var(--texto-base);
+  font-weight: var(--peso-regular);
+  line-height: var(--interlineado-base);
+  color: var(--color-texto-base);
+  background: var(--color-fondo);
+
+  /* encabezado / contenido / pie (CSS Grid) */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+h1, h2, h3, p, ul, ol, dl, dd, figure, address {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+address {
+  font-style: normal;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--espacio-xs) solid var(--color-texto-base);
+  outline-offset: var(--espacio-xs);
+}
+
+
+/*  UTILIDADES */
+.solo-lectores {
+  position: absolute;
+  width: var(--borde);
+  height: var(--borde);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.enlace-salto {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  padding: var(--espacio-sm);
+  background: var(--color-fondo);
+  color: var(--color-texto-base);
+  transform: translateY(-100%);
+}
+
+.enlace-salto:focus {
+  transform: none;
+}
+
+/* Contenedor central: grilla de 12 columnas */
+.contenedor {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--espacio-md);
+  row-gap: var(--espacio-lg);
+  width: 100%;
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+  padding-inline: var(--espacio-md);
+}
+
+/* Mobile: todo ocupa las 12 columnas (una sola columna visual) */
+.contenedor > * {
+  grid-column: 1 / -1;
+}
+
+
+/* ==========================================================================
+   4. ÁTOMOS
+   ========================================================================== */
+
+/* Texto de títulos y subtítulos */
+.texto-titulo {
+  font-size: var(--texto-grande);
+  font-weight: var(--peso-bold);
+  line-height: var(--interlineado-titulo);
+}
+
+.texto-etiqueta {
+  font-size: var(--texto-pequeno);
+  font-weight: var(--peso-bold);
+  color: var(--color-primario);
+}
+
+/* Encabezado de sección: etiqueta + título pegados (molécula) */
+.encabezado-seccion {
+  display: grid;
+}
+
+/* Texto descriptivo */
+.texto-descripcion {
+  font-size: var(--texto-base);
+  font-weight: var(--peso-regular);
+}
+
+/* Logo de la biblioteca */
+.logo-biblioteca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-sm);
+  font-weight: var(--peso-medium);
+}
+
+.logo-biblioteca__sigla {
+  width: auto;
+  height: var(--alto-logo);
+}
+
+/* Botones de navegación */
+.btn-navegacion {
+  display: inline-block;
+  padding: var(--espacio-xs) var(--espacio-sm);
+  font-size: var(--texto-pequeno);
+  border-radius: var(--radio-pill);
+  transition: background var(--transicion);
+}
+
+/* Hover: subrayado blanco recto. Se usa text-decoration porque sigue el texto;
+   un box-shadow copiaba la forma redondeada (border-radius) del enlace y se curvaba. */
+.btn-navegacion:hover {
+  background: none;
+  text-decoration: underline;
+  text-decoration-color: var(--color-fondo);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}
+
+.btn-navegacion--destacado {
+  background: var(--color-fondo);
+  color: var(--color-primario);
+}
+
+.btn-navegacion--destacado:hover {
+  background: var(--color-secundario);
+  text-decoration: none; /* el botón "Sumate" ya es blanco: un subrayado blanco no se vería */
+}
+
+/* Botón de acción principal */
+.btn-accion {
+  display: inline-block;
+  padding: var(--espacio-sm) var(--espacio-lg);
+  border: 0;
+  border-radius: var(--radio-pill);
+  background: var(--color-primario);
+  color: var(--color-fondo);
+  font-weight: var(--peso-medium);
+  text-align: center;
+  cursor: pointer;
+  transition: filter var(--transicion);
+}
+
+.btn-accion:hover {
+  filter: brightness(0.9);
+}
+
+.btn-accion:disabled {
+  background: var(--color-neutro-claro);
+  color: var(--color-neutro-medio);
+  cursor: not-allowed;
+  filter: none;
+}
+
+.btn-accion--bloque {
+  width: 100%;
+  border-radius: var(--radio-md);
+}
+
+/* Estado: inscripción confirmada (lo aplica js/main.js) */
+.btn-accion--confirmado:disabled {
+  background: var(--color-secundario);
+  color: var(--color-primario);
+  cursor: default;
+}
+
+/* Campos de formulario (texto, email, número, mensaje) */
+.campo-texto,
+.campo-email,
+.campo-numero,
+.campo-mensaje {
+  width: 100%;
+  padding: var(--espacio-sm);
+  border: 0;
+  border-radius: var(--radio-sm);
+  background: var(--color-neutro-claro);
+  font-size: var(--texto-base);
+}
+
+.campo-texto::placeholder,
+.campo-email::placeholder,
+.campo-numero::placeholder,
+.campo-mensaje::placeholder {
+  color: var(--color-neutro-medio);
+}
+
+.campo-mensaje {
+  min-height: var(--alto-campo-mensaje);
+  resize: vertical;
+}
+
+/* Etiquetas de estado */
+.etiqueta-estado {
+  display: inline-block;
+  padding: var(--espacio-xs) var(--espacio-sm);
+  border-radius: var(--radio-sm);
+  background: var(--color-secundario);
+  color: var(--color-primario);
+  font-size: var(--texto-pequeno);
+  font-weight: var(--peso-medium);
+}
+
+.etiqueta-estado--finalizado {
+  background: var(--color-neutro-claro);
+  color: var(--color-neutro-medio);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Imágenes de actividades y talleres */
+.imagen-contenido {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+/* ==========================================================================
+   5. MOLÉCULAS
+   ========================================================================== */
+
+/* Barra de navegación */
+.barra-navegacion__lista {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-xs);
+}
+
+/* Bloque estadístico */
+.bloque-estadistico {
+  display: flex;
+  flex-direction: column;
+}
+
+.bloque-estadistico__numero {
+  font-size: var(--texto-grande);
+  font-weight: var(--peso-bold);
+  line-height: var(--interlineado-titulo);
+}
+
+.bloque-estadistico__descripcion {
+  font-size: var(--texto-pequeno);
+}
+
+/* Tarjeta de actividad
+   Container query: el componente se adapta al ancho de SU contenedor.
+   Angosto -> fecha arriba del título. Ancho -> fecha a la izquierda. */
+.tarjeta-actividad {
+  container-type: inline-size;
+  container-name: actividad;
+  border-bottom: var(--borde) solid var(--color-neutro-claro);
+}
+
+.tarjeta-actividad__contenido {
+  display: grid;
+  gap: var(--espacio-xs);
+  padding: var(--espacio-sm);
+}
+
+.tarjeta-actividad__fecha {
+  display: flex;
+  align-items: baseline;
+  gap: var(--espacio-xs);
+}
+
+.tarjeta-actividad__dia {
+  font-size: var(--texto-grande);
+  font-weight: var(--peso-bold);
+  line-height: var(--interlineado-titulo);
+}
+
+.tarjeta-actividad__mes {
+  font-size: var(--texto-base);
+}
+
+.tarjeta-actividad__info {
+  display: grid;
+  gap: var(--espacio-xs);
+  justify-items: start;
+}
+
+.tarjeta-actividad__titulo {
+  font-size: var(--texto-secundario);
+  font-weight: var(--peso-medium);
+  line-height: var(--interlineado-titulo);
+}
+
+.tarjeta-actividad__horario {
+  font-size: var(--texto-pequeno);
+}
+
+.tarjeta-actividad {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--transicion);
+}
+
+.tarjeta-actividad:hover {
+  background: var(--color-secundario);
+}
+
+.tarjeta-actividad--destacada,
+.tarjeta-actividad--destacada:hover {
+  background: var(--color-primario);
+  color: var(--color-fondo);
+}
+
+/* La etiqueta sobre la tarjeta seleccionada mantiene su contraste */
+.tarjeta-actividad--destacada .etiqueta-estado {
+  background: var(--color-secundario);
+  color: var(--color-primario);
+}
+
+@container actividad (min-width: 360px) {
+  .tarjeta-actividad__contenido {
+    grid-template-columns: var(--ancho-fecha) 1fr;
+    align-items: center;
+    column-gap: var(--espacio-md);
+  }
+
+  .tarjeta-actividad__fecha {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .tarjeta-actividad__info {
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+    column-gap: var(--espacio-sm);
+  }
+
+  .tarjeta-actividad__horario {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tarjeta de taller
+   Container query: con espacio suficiente, la meta (día/horario) se muestra
+   en dos columnas; en una tarjeta angosta se apila. */
+.tarjeta-taller {
+  container-type: inline-size;
+  container-name: taller;
+}
+
+.tarjeta-taller__contenido {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-sm);
+  height: 100%;
+  padding: var(--espacio-md);
+  border: var(--borde) solid var(--color-neutro-claro);
+  border-radius: var(--radio-md);
+  background: var(--color-fondo);
+}
+
+.tarjeta-taller__titulo {
+  font-size: var(--texto-secundario);
+  font-weight: var(--peso-medium);
+  line-height: var(--interlineado-titulo);
+}
+
+.tarjeta-taller__descripcion {
+  font-size: var(--texto-pequeno);
+  color: var(--color-neutro-medio);
+}
+
+.tarjeta-taller__meta {
+  display: grid;
+  font-size: var(--texto-pequeno);
+}
+
+.tarjeta-taller__meta dt {
+  font-weight: var(--peso-bold);
+}
+
+.tarjeta-taller__meta dd {
+  color: var(--color-neutro-medio);
+}
+
+.tarjeta-taller__boton {
+  margin-top: auto;
+}
+
+.tarjeta-taller--finalizado .tarjeta-taller__titulo,
+.tarjeta-taller--finalizado .tarjeta-taller__meta {
+  color: var(--color-neutro-medio);
+}
+
+@container taller (min-width: 18rem) {
+  .tarjeta-taller__meta {
+    grid-template-columns: auto 1fr;
+    column-gap: var(--espacio-sm);
+  }
+}
+
+/* Campo de formulario (etiqueta + campo) */
+.campo-formulario {
+  display: grid;
+  gap: var(--espacio-xs);
+  align-content: start;
+}
+
+.campo-formulario__etiqueta {
+  font-weight: var(--peso-medium);
+}
+
+.campo-formulario--fila {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  column-gap: var(--espacio-sm);
+}
+
+/* Bloque de contacto */
+.bloque-contacto__titulo {
+  font-size: var(--texto-base);
+  font-weight: var(--peso-bold);
+  color: var(--color-primario);
+}
+
+.bloque-contacto__dato {
+  font-size: var(--texto-pequeno);
+  font-weight: var(--peso-medium);
+}
+
+.bloque-contacto__redes {
+  display: flex;
+  gap: var(--espacio-sm);
+  margin-top: var(--espacio-xs);
+}
+
+.bloque-contacto__red {
+  display: grid;
+  place-items: center;
+  width: var(--tamano-icono);
+  height: var(--tamano-icono);
+}
+
+.bloque-contacto__icono {
+  width: var(--tamano-red);
+  height: var(--tamano-red);
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* los SVG vienen negros: se pasan a blanco */
+}
+
+
+/* ==========================================================================
+   6. ORGANISMOS
+   ========================================================================== */
+
+/* Encabezado principal */
+.encabezado-principal {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--color-primario);
+  color: var(--color-fondo);
+}
+
+.encabezado-principal__interior {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-xs) var(--espacio-md);
+  max-width: var(--ancho-maximo);
+  margin-inline: auto;
+  padding: var(--espacio-xs) var(--espacio-md);
+}
+
+/* Sección de presentación (hero) */
+.seccion-hero {
+  display: grid;
+  align-items: center;
+  min-height: var(--alto-hero);
+  padding-block: var(--espacio-lg);
+  background:
+    linear-gradient(var(--color-overlay), var(--color-overlay)),
+    url("../img/hero-bps.png") 77% center / cover no-repeat; /* 77%: centra el cartel "Biblioteca Popular Sarmiento" en mobile */
+  color: var(--color-fondo);
+}
+
+.seccion-hero__contenido {
+  display: grid;
+  gap: var(--espacio-sm);
+  justify-items: start;
+}
+
+.seccion-hero__titulo {
+  font-size: var(--texto-grande);
+  font-weight: var(--peso-extrabold);
+  line-height: var(--interlineado-titulo);
+}
+
+.seccion-hero__estadisticas {
+  display: flex;
+  gap: var(--espacio-lg);
+  margin-top: var(--espacio-md);
+}
+
+/* Sección institucional */
+.seccion-institucional__galeria {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  padding: 0 var(--espacio-sm) var(--espacio-sm) 0; /* lugar para la sombra */
+}
+
+.figura-historica {
+  box-shadow: var(--espacio-sm) var(--espacio-sm) 0 var(--color-secundario);
+}
+
+.figura-historica img {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+.figura-historica--arriba {
+  grid-column: 1 / 8;
+  grid-row: 1;
+}
+
+.figura-historica--abajo {
+  grid-column: 2 / 9;
+  grid-row: 2;
+  position: relative;
+  margin-top: calc(var(--espacio-md) * -1);
+}
+
+.seccion-institucional__texto {
+  display: grid;
+  gap: var(--espacio-sm);
+  align-content: center;
+}
+
+.seccion-institucional__texto .texto-descripcion {
+  font-size: var(--texto-base);
+}
+
+/* Grilla de actividades culturales */
+.grilla-actividades__lista {
+  border-top: var(--borde) solid var(--color-neutro-claro);
+}
+
+.grilla-actividades__destacado {
+  align-self: start;
+  box-shadow: var(--espacio-sm) var(--espacio-sm) 0 var(--color-primario);
+}
+
+.grilla-actividades__destacado img {
+  aspect-ratio: 1;
+}
+
+/* Afiche sin imagen: bloque con el título de la actividad elegida
+   (lo activa js/main.js al seleccionar una actividad sin afiche) */
+.grilla-actividades__destacado--sin-imagen {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  padding: var(--espacio-md);
+  background: var(--color-primario);
+  color: var(--color-fondo);
+  text-align: center;
+  box-shadow: var(--espacio-sm) var(--espacio-sm) 0 var(--color-secundario);
+}
+
+.grilla-actividades__titulo-afiche {
+  font-size: var(--texto-secundario);
+  font-weight: var(--peso-bold);
+  line-height: var(--interlineado-titulo);
+}
+
+/* Grilla de talleres */
+.grilla-talleres__lista {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-md);
+}
+
+/* Sección de voluntariado */
+.seccion-voluntariado {
+  padding-block: var(--espacio-80px);
+  background:
+    linear-gradient(var(--color-overlay), var(--color-overlay)),
+    url("../img/estante.png") center / cover no-repeat;
+  color: var(--color-fondo);
+}
+
+.seccion-voluntariado__texto {
+  display: grid;
+  gap: var(--espacio-md);
+  align-content: center;
+}
+
+.seccion-voluntariado__formulario {
+  display: grid;
+  gap: var(--espacio-sm);
+  padding: var(--espacio-md);
+  border-radius: var(--radio-md);
+  background: var(--color-fondo);
+  color: var(--color-texto-base);
+}
+
+/* Mensaje de confirmación: reemplaza al formulario cuando se envía bien (js/main.js) */
+.seccion-voluntariado__confirmacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-md);
+  padding: var(--espacio-lg) var(--espacio-md);
+  border-radius: var(--radio-md);
+  background: var(--color-fondo);
+  color: var(--color-texto-base);
+  text-align: center;
+}
+
+.seccion-voluntariado__icono-exito {
+  width: var(--tamano-check);
+  height: var(--tamano-check);
+}
+
+.icono-exito__circulo {
+  fill: var(--color-primario);
+}
+
+.icono-exito__marca {
+  fill: none;
+  stroke: var(--color-fondo);
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.seccion-voluntariado__confirmacion-titulo {
+  font-size: var(--texto-grande);
+  font-weight: var(--peso-bold);
+  line-height: var(--interlineado-titulo);
+  text-transform: uppercase;
+}
+
+.seccion-voluntariado__confirmacion-texto {
+  max-width: var(--ancho-texto-confirmacion);
+  font-size: var(--texto-secundario);
+  line-height: var(--interlineado-compacto);
+}
+
+.seccion-voluntariado__mensaje {
+  min-height: var(--espacio-md);
+  font-size: var(--texto-pequeno);
+}
+
+.seccion-voluntariado__mensaje--error {
+  color: var(--color-primario);
+}
+
+.seccion-voluntariado__mensaje--exito {
+  color: var(--color-texto-base);
+  font-weight: var(--peso-medium);
+}
+
+/* Pie de página */
+.pie-pagina {
+  padding-block: var(--espacio-lg) var(--espacio-md);
+  background: var(--color-texto-base);
+  color: var(--color-fondo);
+}
+
+.pie-pagina .contenedor {
+  row-gap: var(--espacio-md);
+}
+
+.pie-pagina__derechos {
+  font-size: var(--texto-pequeno);
+  color: var(--color-neutro-medio);
+  text-align: center;
+}
+
+
+/* ==========================================================================
+   7-9. LAYOUT RESPONSIVO (mobile-first sobre la grilla de 12 columnas)
+   Mobile  (base, desde 375px): 1 columna — ya definido arriba.
+   ========================================================================== */
+
+/* ---- Tablet: 2 columnas principales ------------------------------------ */
+@media (min-width: 48em) {
+  .encabezado-principal__interior {
+    flex-wrap: nowrap;
+  }
+
+  .btn-navegacion {
+    padding-inline: var(--espacio-md);
+  }
+
+  .seccion-hero__titulo {
+    font-size: var(--texto-display);
+  }
+
+  .seccion-hero {
+    background:
+      linear-gradient(90deg, var(--color-overlay), transparent),
+      url("../img/hero-bps.png") 70% center / cover no-repeat;
+  }
+
+  .seccion-hero__contenido {
+    grid-column: 1 / span 9;
+  }
+
+  /* Nosotros: imágenes | texto */
+  .seccion-institucional .contenedor,
+  .grilla-actividades .contenedor,
+  .seccion-voluntariado .contenedor {
+    align-items: start;
+  }
+
+  .seccion-institucional__galeria { grid-column: 1 / span 6; }
+  .seccion-institucional__texto   { grid-column: 7 / span 6; }
+
+  /* Actividades: listado | afiche */
+  .grilla-actividades__lista     { grid-column: 1 / span 7; }
+  .grilla-actividades__destacado { grid-column: 8 / span 5; }
+
+  /* Talleres: 2 tarjetas por fila */
+  .grilla-talleres__lista {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Voluntariado: información | formulario */
+  .seccion-voluntariado__texto      { grid-column: 1 / span 6; }
+  .seccion-voluntariado__formulario { grid-column: 7 / span 6; padding: var(--espacio-lg); }
+  .seccion-voluntariado__confirmacion { grid-column: 7 / span 6; }
+
+  /* Pie de página: 2 columnas */
+  .pie-pagina .contenedor > * { grid-column: span 6; }
+  .pie-pagina .contenedor > .pie-pagina__derechos { grid-column: 1 / -1; }
+}
+
+/* ---- Desktop: grilla completa de 12 columnas ---------------------------- */
+/* Todo este bloque sale de medir el frame "Desktop - 9" (1440px de ancho).
+   Va dentro del media query para no tocar lo que ya funciona en mobile/tablet. */
+@media (min-width: 64em) {
+
+  /* Contenedor y encabezado: 70px de margen a cada lado */
+  .contenedor,
+  .encabezado-principal__interior {
+    padding-inline: var(--espacio-70px);
+  }
+
+  .encabezado-principal__interior {
+    min-height: var(--alto-encabezado);
+  }
+
+  .logo-biblioteca__nombre {
+    font-size: var(--texto-secundario);
+  }
+
+  .barra-navegacion__lista {
+    gap: var(--espacio-md);
+  }
+
+  .btn-navegacion {
+    padding: 0;
+    font-size: var(--texto-base);
+  }
+
+  .btn-navegacion--destacado {
+    margin-left: var(--espacio-md);
+    padding-inline: var(--espacio-md);
+  }
+
+  /* Botones: rectángulo redondeado de 42px de alto, no una píldora */
+  .btn-accion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--alto-boton);
+    padding: 0 var(--espacio-30px);
+    border-radius: var(--radio-control);
+    font-size: var(--texto-intermedio);
+  }
+
+  .btn-accion--bloque {
+    border-radius: var(--radio-control);
+  }
+
+  /* Etiquetas e insignias */
+  .texto-etiqueta {
+    font-size: var(--texto-mediano);
+  }
+
+  .etiqueta-estado {
+    padding: var(--espacio-xs) var(--espacio-md);
+    font-size: var(--texto-mediano);
+    font-weight: var(--peso-bold);
+    line-height: var(--interlineado-titulo);
+  }
+
+  /* Hero */
+  .seccion-hero {
+    min-height: var(--alto-hero-desktop);
+  }
+
+  .seccion-hero__contenido {
+    grid-column: 1 / span 7;
+    max-width: var(--ancho-texto-hero);
+  }
+
+  .seccion-hero .texto-descripcion {
+    font-size: var(--texto-secundario);
+  }
+
+  .seccion-hero__estadisticas {
+    gap: var(--espacio-80px);
+  }
+
+  /* Nosotros */
+  .seccion-institucional__texto {
+    grid-column: 7 / span 6;
+    padding-left: var(--espacio-30px);
+  }
+
+  .seccion-institucional__texto .encabezado-seccion {
+    margin-bottom: var(--espacio-md);
+  }
+
+  .seccion-institucional__texto .texto-descripcion {
+    line-height: var(--interlineado-compacto);
+  }
+
+  .figura-historica img {
+    aspect-ratio: 2.1 / 1; /* proporción de las fotos en el diseño: 548 x 258 */
+  }
+
+  .figura-historica--abajo {
+    margin-top: var(--solape-galeria);
+  }
+
+  /* Actividades: listado | afiche pegados.
+     Dos columnas: el listado ocupa lo que sobra y el afiche tiene ancho fijo. */
+  .grilla-actividades .contenedor {
+    grid-template-columns: 1fr var(--ancho-columna-afiche);
+    column-gap: 0;
+  }
+
+  .grilla-actividades__lista {
+    grid-column: 1;
+    border-top: 0;
+  }
+
+  .grilla-actividades .contenedor > .grilla-actividades__destacado {
+    grid-column: 2;
+    align-self: start;
+    margin: var(--subida-afiche) var(--espacio-sm) 0 0; /* arriba, derecha (lugar para la sombra), abajo, izquierda */
+  }
+
+  .tarjeta-actividad {
+    border-bottom-color: var(--color-borde-fuerte);
+  }
+
+  .tarjeta-actividad__contenido {
+    min-height: var(--alto-fila-actividad);
+    padding: 0;
+    column-gap: var(--espacio-70px);
+  }
+
+  .tarjeta-actividad__dia {
+    font-weight: var(--peso-medium);
+  }
+
+  .tarjeta-actividad__mes {
+    font-size: var(--texto-secundario);
+    line-height: var(--interlineado-titulo);
+  }
+
+  .tarjeta-actividad__titulo {
+    font-weight: var(--peso-regular);
+  }
+
+  .tarjeta-actividad__horario {
+    font-size: var(--texto-mediano);
+    color: var(--color-neutro-medio);
+  }
+
+  /* En el diseño el texto de la fila seleccionada es negro, no blanco */
+  .tarjeta-actividad--destacada,
+  .tarjeta-actividad--destacada:hover {
+    color: var(--color-texto-base);
+  }
+
+  .tarjeta-actividad--destacada .tarjeta-actividad__horario {
+    color: inherit;
+  }
+
+  /* Talleres: 4 tarjetas por fila */
+  .grilla-talleres__lista {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .tarjeta-taller__contenido {
+    padding: var(--espacio-30px);
+    border-color: var(--color-borde);
+    border-radius: var(--radio-lg);
+  }
+
+  .tarjeta-taller__titulo {
+    font-weight: var(--peso-bold);
+  }
+
+  .tarjeta-taller__descripcion {
+    font-size: var(--texto-base);
+    line-height: var(--interlineado-titulo);
+  }
+
+  /* La meta va apilada (título arriba, dato abajo). Hay que repetir la regla
+     porque el container query de 18rem se activa con tarjetas de 310px. */
+  .tarjeta-taller__meta {
+    grid-template-columns: 1fr;
+    font-size: var(--texto-base);
+  }
+
+  /* En el diseño el taller finalizado conserva el título y la etiqueta en negro */
+  .tarjeta-taller--finalizado .tarjeta-taller__titulo,
+  .tarjeta-taller--finalizado .tarjeta-taller__meta {
+    color: var(--color-texto-base);
+  }
+
+  /* Voluntariado */
+  .seccion-voluntariado {
+    padding-block: var(--espacio-45px);
+  }
+
+  .seccion-voluntariado__texto {
+    grid-column: 1 / span 6;
+    align-self: start;
+    max-width: 570px;
+    padding-top: var(--espacio-60px);
+  }
+
+  .seccion-voluntariado__texto .texto-descripcion {
+    font-size: var(--texto-intermedio);
+  }
+
+  .seccion-voluntariado__formulario {
+    grid-column: 7 / span 6;
+    justify-self: end;
+    width: var(--ancho-formulario);
+    padding: var(--espacio-30px) var(--espacio-45px) var(--espacio-sm);
+    border-radius: var(--radio-lg);
+  }
+
+  .seccion-voluntariado__confirmacion {
+    grid-column: 7 / span 6;
+    justify-self: end;
+    width: var(--ancho-formulario);
+    min-height: var(--alto-confirmacion);
+    padding-top: var(--espacio-80px);
+    border-radius: var(--radio-lg);
+  }
+
+  .campo-formulario__etiqueta {
+    font-size: var(--texto-secundario);
+    font-weight: var(--peso-regular);
+  }
+
+  .campo-formulario--fila {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 5fr);
+  }
+
+  .campo-texto,
+  .campo-email,
+  .campo-numero,
+  .campo-mensaje {
+    padding: 0 var(--espacio-10px);
+    border: var(--borde) solid var(--color-borde);
+    border-radius: var(--radio-control);
+  }
+
+  .campo-texto,
+  .campo-email,
+  .campo-numero {
+    height: var(--alto-campo);
+  }
+
+  .campo-mensaje {
+    height: var(--alto-campo-mensaje-desktop);
+    padding-block: var(--espacio-10px);
+  }
+
+  .seccion-voluntariado__mensaje {
+    min-height: 0;
+  }
+
+  /* Pie de página */
+  .pie-pagina .contenedor > .logo-biblioteca    { grid-column: 1 / span 2; }
+  .pie-pagina .contenedor > .bloque-contacto    { grid-column: span 3; }
+  .pie-pagina .contenedor > .bloque-contacto--direccion { grid-column: span 4; }
+  .pie-pagina .contenedor > .pie-pagina__derechos { grid-column: 1 / -1; }
+
+  .pie-pagina .logo-biblioteca__sigla {
+    height: var(--alto-logo-pie);
+  }
+
+  .bloque-contacto__titulo {
+    font-size: var(--texto-secundario);
+  }
+
+  .bloque-contacto__dato {
+    font-size: var(--texto-base);
+  }
+
+  .pie-pagina__derechos {
+    font-size: var(--texto-base);
+  }
+}
+
+
+/* ==========================================================================
+   10. PREFERENCIAS DEL USUARIO
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+}
+
+/* Separación vertical entre secciones (--espacio-80px, Etapa 2) */
+.seccion-institucional,
+.grilla-actividades,
+.grilla-talleres {
+  padding-block: var(--espacio-80px);
+}
+
+
+/* ==========================================================================
+   11. MOBILE: menú hamburguesa, tipografía reducida y afiche junto a la actividad
+   ========================================================================== */
+
+/* Botón hamburguesa (oculto desde tablet) */
+.btn-hamburguesa {
+  display: grid;
+  place-items: center;
+  width: var(--tamano-icono);
+  height: var(--tamano-icono);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-sm);
+  background: transparent;
+  color: var(--color-fondo);
+  cursor: pointer;
+}
+
+.btn-hamburguesa__barras,
+.btn-hamburguesa__barras::before,
+.btn-hamburguesa__barras::after {
+  display: block;
+  width: var(--espacio-md);
+  height: calc(var(--borde) * 2);
+  border-radius: var(--radio-pill);
+  background: currentColor;
+  transition: transform var(--transicion), background var(--transicion);
+}
+
+.btn-hamburguesa__barras {
+  position: relative;
+}
+
+.btn-hamburguesa__barras::before,
+.btn-hamburguesa__barras::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.btn-hamburguesa__barras::before { top: calc(var(--espacio-xs) * -1); }
+.btn-hamburguesa__barras::after  { top: var(--espacio-xs); }
+
+/* Abierto: se transforma en una X */
+.btn-hamburguesa[aria-expanded="true"] .btn-hamburguesa__barras { background: transparent; }
+.btn-hamburguesa[aria-expanded="true"] .btn-hamburguesa__barras::before { top: 0; transform: rotate(45deg); }
+.btn-hamburguesa[aria-expanded="true"] .btn-hamburguesa__barras::after  { top: 0; transform: rotate(-45deg); }
+
+@media (max-width: 47.99em) {
+  /* Tipografía para celular: se redefinen los tokens grandes */
+  :root {
+    --texto-secundario: 1.125rem; /* 18px */
+    --texto-grande: 1.5rem;       /* 24px */
+    --texto-display: 2.25rem;     /* 36px */
+    --espacio-80px: 3.125rem;     /* 50px entre secciones */
+  }
+
+  .encabezado-principal__interior {
+    flex-wrap: wrap;
+    padding-block: var(--espacio-sm);
+  }
+
+  /* Logo y hamburguesa en la misma fila */
+  .encabezado-principal__interior .logo-biblioteca {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .logo-biblioteca__nombre {
+    font-size: var(--texto-base);
+    line-height: var(--interlineado-titulo);
+  }
+
+  /* Menú desplegable debajo del encabezado */
+  .barra-navegacion {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .barra-navegacion.barra-navegacion--abierta {
+    display: block;
+  }
+
+  .barra-navegacion__lista {
+    display: grid;
+    gap: var(--espacio-xs);
+    padding-block: var(--espacio-sm) var(--espacio-xs);
+  }
+
+  .btn-navegacion {
+    display: block;
+    padding-block: var(--espacio-sm);
+    font-size: var(--texto-base);
+  }
+
+  .btn-navegacion--destacado {
+    text-align: center;
+  }
+
+  .seccion-hero {
+    min-height: 32rem;
+  }
+}
+
+@media (min-width: 48em) {
+  .btn-hamburguesa {
+    display: none;
+  }
+}
+
+/* Afiche pegado a la actividad seleccionada (mobile y tablet).
+   js/main.js mueve el afiche dentro de la tarjeta elegida. */
+.tarjeta-actividad > .grilla-actividades__destacado {
+  width: min(100%, 16rem);
+  margin: 0 var(--espacio-sm) var(--espacio-lg);
+  box-shadow: var(--espacio-sm) var(--espacio-sm) 0 var(--color-secundario);
+}
+
+
+/* ==========================================================================
+   12. BOTÓN "VOLVER ARRIBA"
+   Fijo en la esquina inferior derecha. Está oculto hasta que se baja en la
+   página (js/main.js le agrega la clase --visible).
+   ========================================================================== */
+.btn-subir {
+  position: fixed;
+  right: var(--espacio-30px);
+  bottom: var(--espacio-30px);
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  width: var(--tamano-boton-subir);
+  height: var(--tamano-boton-subir);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radio-pill);
+  background: var(--color-primario);
+  color: var(--color-fondo);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden; /* oculto también para teclado y lectores de pantalla */
+  transition: opacity var(--transicion), visibility var(--transicion), filter var(--transicion);
+}
+
+.btn-subir--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-subir:hover {
+  filter: brightness(0.9);
+}
+
+.btn-subir__icono {
+  width: var(--tamano-icono);
+  height: var(--tamano-icono);
+}
