@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Biblioteca Popular Sarmiento — Alejandro Korn</title>
+  <meta name="description" content="Más de 100 años leyendo juntos. Actividades culturales, talleres y voluntariado en la Biblioteca Popular Sarmiento de Alejandro Korn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="enlace-salto" href="#contenido">Saltar al contenido</a>
+
+  <!-- ORGANISMO: Encabezado principal -->
+  <header class="encabezado-principal">
+    <div class="encabezado-principal__interior">
+      <a class="logo-biblioteca" href="#inicio" aria-label="Biblioteca Popular Sarmiento, ir al inicio">
+        <img class="logo-biblioteca__sigla" src="img/logo-bps.png" width="70" height="47" alt="" aria-hidden="true">
+        <span class="logo-biblioteca__nombre">Biblioteca Popular Sarmiento</span>
+      </a>
+
+      <!-- ÁTOMO: Botón hamburguesa (visible solo en mobile) -->
+      <button class="btn-hamburguesa" type="button" aria-expanded="false" aria-controls="menu-principal">
+        <span class="solo-lectores">Menú</span>
+        <span class="btn-hamburguesa__barras" aria-hidden="true"></span>
+      </button>
+
+      <!-- MOLÉCULA: Barra de navegación -->
+      <nav class="barra-navegacion" id="menu-principal" aria-label="Principal">
+        <ul class="barra-navegacion__lista">
+          <li><a class="btn-navegacion" href="#nosotros">Nosotros</a></li>
+          <li><a class="btn-navegacion" href="#actividades">Actividades</a></li>
+          <li><a class="btn-navegacion" href="#talleres">Talleres</a></li>
+          <li><a class="btn-navegacion btn-navegacion--destacado" href="#voluntariado">Sumate</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ORGANISMO: Sección de presentación (hero) -->
+    <section class="seccion-hero" id="inicio" aria-labelledby="titulo-hero">
+      <div class="contenedor">
+        <div class="seccion-hero__contenido">
+          <h1 class="seccion-hero__titulo" id="titulo-hero">Más de 100 años leyendo juntos</h1>
+          <p class="texto-descripcion">Cultura, historia y comunidad en el corazón de nuestro pueblo</p>
+          <a class="btn-accion" href="#voluntariado">Ser voluntario</a>
+
+          <ul class="seccion-hero__estadisticas">
+            <li class="bloque-estadistico">
+              <span class="bloque-estadistico__numero">1923</span>
+              <span class="bloque-estadistico__descripcion">Año de fundación</span>
+            </li>
+            <li class="bloque-estadistico">
+              <span class="bloque-estadistico__numero">+20.000</span>
+              <span class="bloque-estadistico__descripcion">Volúmenes de libros</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORGANISMO: Sección institucional -->
+    <section class="seccion-institucional" id="nosotros" aria-labelledby="titulo-nosotros">
+      <div class="contenedor">
+        <div class="seccion-institucional__galeria">
+          <figure class="figura-historica figura-historica--arriba">
+            <img class="imagen-contenido" src="img/historia-1.png" width="561" height="271" loading="lazy"
+                 alt="Fotografía antigua en blanco y negro de personas leyendo en una mesa de la biblioteca">
+          </figure>
+          <figure class="figura-historica figura-historica--abajo">
+            <img class="imagen-contenido" src="img/historia-2.png" width="560" height="276" loading="lazy"
+                 alt="Fotografía antigua en blanco y negro de la sala de lectura, con estantes de libros y una mesa larga">
+          </figure>
+        </div>
+
+        <div class="seccion-institucional__texto">
+          <div class="encabezado-seccion">
+            <p class="texto-etiqueta">Nosotros</p>
+            <h2 class="texto-titulo" id="titulo-nosotros">Donde todo comenzó</h2>
+          </div>
+          <p class="texto-descripcion">La Biblioteca Popular Sarmiento nació el 8 de abril de 1923 por iniciativa de un grupo de jóvenes vecinos con el deseo de acercar la lectura, la educación y la cultura a la comunidad de Alejandro Korn.</p>
+          <p class="texto-descripcion">En sus primeros años, la biblioteca funcionó en un pequeño local cercano a la estación de trenes. Gracias al esfuerzo y al compromiso de sus impulsores y de los vecinos, en 1929 logró adquirir un terreno propio y trasladarse a su sede de la avenida Independencia. Desde entonces, sus instalaciones no solo albergaron libros y lectores, sino que también se convirtieron en un punto de encuentro para la comunidad y en un espacio que acompañó el crecimiento de otras instituciones locales.</p>
+          <p class="texto-descripcion">A lo largo de su historia, la biblioteca mantuvo vivo su propósito de promover el acceso a la cultura y la educación. Hoy continúa ese legado a través de talleres, propuestas educativas, ferias y eventos artísticos que convocan a personas de distintas edades e intereses.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORGANISMO: Grilla de actividades culturales -->
+    <section class="grilla-actividades" id="actividades" aria-labelledby="titulo-actividades">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <p class="texto-etiqueta">Actividades</p>
+          <h2 class="texto-titulo" id="titulo-actividades">Agenda cultural</h2>
+        </div>
+
+        <ol class="grilla-actividades__lista">
+          <!-- MOLÉCULA: Tarjeta de actividad (usa container query) -->
+          <li class="tarjeta-actividad tarjeta-actividad--destacada" aria-current="true" tabindex="0" data-afiche-titulo="Possession" data-afiche-img="img/afiche-possession.png" data-afiche-alt="Afiche de la película Possession (1981), de Andrzej Żuławski">
+            <article class="tarjeta-actividad__contenido">
+              <time class="tarjeta-actividad__fecha" datetime="2026-10-31">
+                <span class="tarjeta-actividad__dia">31</span>
+                <span class="tarjeta-actividad__mes">Oct</span>
+              </time>
+              <div class="tarjeta-actividad__info">
+                <h3 class="tarjeta-actividad__titulo">Película: Possession (1981)</h3>
+                <span class="etiqueta-estado">Realizado</span>
+                <p class="tarjeta-actividad__horario">22hs</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tarjeta-actividad" tabindex="0" data-afiche-titulo="From Dusk Till Dawn" data-afiche-img="img/afiche-dusk-till-dawn.jpg" data-afiche-alt="Afiche de la película From Dusk Till Dawn (1996)">
+            <article class="tarjeta-actividad__contenido">
+              <time class="tarjeta-actividad__fecha" datetime="2026-10-17">
+                <span class="tarjeta-actividad__dia">17</span>
+                <span class="tarjeta-actividad__mes">Oct</span>
+              </time>
+              <div class="tarjeta-actividad__info">
+                <h3 class="tarjeta-actividad__titulo">Película: From Dusk Till Dawn (1996)</h3>
+                <span class="etiqueta-estado">Realizado</span>
+                <p class="tarjeta-actividad__horario">22hs</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tarjeta-actividad" tabindex="0" data-afiche-titulo="Hokum" data-afiche-img="img/afiche-hokum.jpg" data-afiche-alt="Afiche de la película Hokum (2026)">
+            <article class="tarjeta-actividad__contenido">
+              <time class="tarjeta-actividad__fecha" datetime="2026-10-03">
+                <span class="tarjeta-actividad__dia">03</span>
+                <span class="tarjeta-actividad__mes">Oct</span>
+              </time>
+              <div class="tarjeta-actividad__info">
+                <h3 class="tarjeta-actividad__titulo">Película: Hokum (2026)</h3>
+                <span class="etiqueta-estado">Realizado</span>
+                <p class="tarjeta-actividad__horario">22hs</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="tarjeta-actividad" tabindex="0" data-afiche-titulo="Feria de emprendedores" data-afiche-img="img/afiche-feria.jpg" data-afiche-alt="Puesto de la Biblioteca Popular Sarmiento en la feria de emprendedores, con peluches y objetos sobre una mesa">
+            <article class="tarjeta-actividad__contenido">
+              <time class="tarjeta-actividad__fecha" datetime="2026-09-26">
+                <span class="tarjeta-actividad__dia">26</span>
+                <span class="tarjeta-actividad__mes">Sep</span>
+              </time>
+              <div class="tarjeta-actividad__info">
+                <h3 class="tarjeta-actividad__titulo">Feria de emprendedores</h3>
+                <span class="etiqueta-estado">Realizado</span>
+                <p class="tarjeta-actividad__horario">11 a 18hs</p>
+              </div>
+            </article>
+          </li>
+        </ol>
+
+        <figure class="grilla-actividades__destacado" id="afiche">
+          <img class="imagen-contenido" id="afiche-imagen" src="img/afiche-possession.jpg" width="394" height="390"
+               alt="Afiche de la película Possession (1981), de Andrzej Żuławski">
+          <figcaption class="grilla-actividades__titulo-afiche" id="afiche-titulo" hidden>Possession</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ORGANISMO: Grilla de talleres -->
+    <section class="grilla-talleres" id="talleres" aria-labelledby="titulo-talleres">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <p class="texto-etiqueta">Formación</p>
+          <h2 class="texto-titulo" id="titulo-talleres">Talleres y cursos</h2>
+        </div>
+
+        <ul class="grilla-talleres__lista">
+          <!-- MOLÉCULA: Tarjeta de taller (usa container query) -->
+          <li class="tarjeta-taller">
+            <article class="tarjeta-taller__contenido">
+              <span class="etiqueta-estado">En curso</span>
+              <h3 class="tarjeta-taller__titulo">Taller de crochet</h3>
+              <p class="tarjeta-taller__descripcion">Aprendé a tejer con aguja de crochet, desde los primeros puntos hasta tu primer proyecto.</p>
+              <dl class="tarjeta-taller__meta">
+                <dt>Día y horario:</dt>
+                <dd>Jueves 14.30hs</dd>
+              </dl>
+              <a class="btn-accion btn-accion--bloque tarjeta-taller__boton" href="https://wa.me/5492224447874?text=Hola%2C%20quiero%20anotarme%20en%3A%20Taller%20de%20crochet" target="_blank" rel="noopener" aria-label="Anotarse en Taller de crochet por WhatsApp (se abre en una pestaña nueva)">Anotarse</a>
+            </article>
+          </li>
+
+          <li class="tarjeta-taller">
+            <article class="tarjeta-taller__contenido">
+              <span class="etiqueta-estado">En curso</span>
+              <h3 class="tarjeta-taller__titulo">Taller de macramé</h3>
+              <p class="tarjeta-taller__descripcion">Anudá y creá piezas decorativas usando solo hilo y tus manos.</p>
+              <dl class="tarjeta-taller__meta">
+                <dt>Día y horario:</dt>
+                <dd>Martes 17hs</dd>
+              </dl>
+              <a class="btn-accion btn-accion--bloque tarjeta-taller__boton" href="https://wa.me/5492224447874?text=Hola%2C%20quiero%20anotarme%20en%3A%20Taller%20de%20macram%C3%A9" target="_blank" rel="noopener" aria-label="Anotarse en Taller de macramé por WhatsApp (se abre en una pestaña nueva)">Anotarse</a>
+            </article>
+          </li>
+
+          <li class="tarjeta-taller">
+            <article class="tarjeta-taller__contenido">
+              <span class="etiqueta-estado">En curso</span>
+              <h3 class="tarjeta-taller__titulo">Acompañante terapéutico</h3>
+              <p class="tarjeta-taller__descripcion">Un espacio para fortalecer la palabra, la escucha y los vínculos que sostienen.</p>
+              <dl class="tarjeta-taller__meta">
+                <dt>Duración:</dt>
+                <dd>4 meses</dd>
+              </dl>
+              <a class="btn-accion btn-accion--bloque tarjeta-taller__boton" href="https://wa.me/5492224447874?text=Hola%2C%20quiero%20anotarme%20en%3A%20Acompa%C3%B1ante%20terap%C3%A9utico" target="_blank" rel="noopener" aria-label="Anotarse en Acompañante terapéutico por WhatsApp (se abre en una pestaña nueva)">Anotarse</a>
+            </article>
+          </li>
+
+          <li class="tarjeta-taller tarjeta-taller--finalizado">
+            <article class="tarjeta-taller__contenido">
+              <span class="etiqueta-estado etiqueta-estado--finalizado">Finalizado</span>
+              <h3 class="tarjeta-taller__titulo">Taller de comunicación</h3>
+              <p class="tarjeta-taller__descripcion">Un espacio para fortalecer la palabra, la escucha y los vínculos que sostienen.</p>
+              <dl class="tarjeta-taller__meta">
+                <dt>Día y horario:</dt>
+                <dd>Sábado 16hs</dd>
+              </dl>
+              <button class="btn-accion btn-accion--bloque tarjeta-taller__boton" type="button" disabled>Anotarse</button>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ORGANISMO: Sección de voluntariado -->
+    <section class="seccion-voluntariado" id="voluntariado" aria-labelledby="titulo-voluntariado">
+      <div class="contenedor">
+        <div class="seccion-voluntariado__texto">
+          <div class="encabezado-seccion">
+            <p class="texto-etiqueta">Sumate</p>
+            <h2 class="texto-titulo" id="titulo-voluntariado">Hacete voluntario/a</h2>
+          </div>
+          <p class="texto-descripcion">La biblioteca funciona gracias a la gente del barrio. Si tenés ganas de dar una mano, hay lugar para vos. Completá tus datos y te contactaremos tan pronto nos sea posible.</p>
+          <p class="texto-descripcion">Los voluntarios son el recurso más importante que puede tener una organización comunitaria. Trabajar para mejorar la comunidad en la que vivís es beneficioso tanto para vos como para nosotros.</p>
+        </div>
+
+        <form class="seccion-voluntariado__formulario" id="formulario-voluntariado" novalidate>
+          <!-- MOLÉCULA: Campo de formulario -->
+          <div class="campo-formulario">
+            <label class="campo-formulario__etiqueta" for="nombre">Nombre completo</label>
+            <input class="campo-texto" id="nombre" name="nombre" type="text" placeholder="Nombre y apellido" autocomplete="name" required>
+          </div>
+
+          <div class="campo-formulario campo-formulario--fila">
+            <div class="campo-formulario">
+              <label class="campo-formulario__etiqueta" for="edad">Edad</label>
+              <input class="campo-numero" id="edad" name="edad" type="number" min="14" max="120" inputmode="numeric" placeholder="23" required>
+            </div>
+            <div class="campo-formulario">
+              <label class="campo-formulario__etiqueta" for="correo">Correo electrónico</label>
+              <input class="campo-email" id="correo" name="correo" type="email" placeholder="nombre@correo.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="campo-formulario">
+            <label class="campo-formulario__etiqueta" for="motivo">¿Por qué querés sumarte?</label>
+            <textarea class="campo-mensaje" id="motivo" name="motivo" placeholder="Contanos con tus palabras" required></textarea>
+          </div>
+
+          <button class="btn-accion btn-accion--bloque" type="submit">Anotarse</button>
+          <p class="seccion-voluntariado__mensaje" id="mensaje-formulario" role="status" aria-live="polite"></p>
+        </form>
+
+        <!-- Mensaje de éxito: aparece en lugar del formulario cuando se envía bien -->
+        <div class="seccion-voluntariado__confirmacion" id="confirmacion-voluntariado" tabindex="-1" hidden>
+          <svg class="seccion-voluntariado__icono-exito" viewBox="0 0 164 164" aria-hidden="true" focusable="false">
+            <circle class="icono-exito__circulo" cx="82" cy="82" r="82"/>
+            <path class="icono-exito__marca" d="M31 79 L66 119 L128 57"/>
+          </svg>
+          <h3 class="seccion-voluntariado__confirmacion-titulo">¡Gracias por sumarte!</h3>
+          <p class="seccion-voluntariado__confirmacion-texto">Los datos fueron enviados correctamente, en cuanto podamos, te contactaremos. Estate atento a tu correo electrónico.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ORGANISMO: Pie de página -->
+  <footer class="pie-pagina" id="contacto">
+    <div class="contenedor">
+      <h2 class="solo-lectores">Información de contacto</h2>
+
+      <a class="logo-biblioteca" href="#inicio" aria-label="Biblioteca Popular Sarmiento, ir al inicio">
+        <img class="logo-biblioteca__sigla" src="img/logo-bps.png" width="70" height="47" alt="" aria-hidden="true">
+      </a>
+
+      <!-- MOLÉCULA: Bloque de contacto -->
+      <div class="bloque-contacto">
+        <h3 class="bloque-contacto__titulo">Correo</h3>
+        <a class="bloque-contacto__dato" href="mailto:bpsarmientoak@gmail.com">bpsarmientoak@gmail.com</a>
+      </div>
+
+      <div class="bloque-contacto">
+        <h3 class="bloque-contacto__titulo">Contacto</h3>
+        <ul class="bloque-contacto__redes">
+          <li><a class="bloque-contacto__red" href="#"><img class="bloque-contacto__icono" src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/svgs/brands/facebook.svg" alt="" aria-hidden="true"><span class="solo-lectores">Facebook</span></a></li>
+          <li><a class="bloque-contacto__red" href="https://wa.me/5492224447874" target="_blank" rel="noopener"><img class="bloque-contacto__icono" src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/svgs/brands/whatsapp.svg" alt="" aria-hidden="true"><span class="solo-lectores">WhatsApp</span></a></li>
+          <li><a class="bloque-contacto__red" href="#"><img class="bloque-contacto__icono" src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/svgs/brands/instagram.svg" alt="" aria-hidden="true"><span class="solo-lectores">Instagram</span></a></li>
+        </ul>
+      </div>
+
+      <div class="bloque-contacto bloque-contacto--direccion">
+        <h3 class="bloque-contacto__titulo">Dirección</h3>
+        <address class="bloque-contacto__dato">Av. Independencia 16, Alejandro Korn, Buenos Aires</address>
+      </div>
+
+      <p class="pie-pagina__derechos">©2026. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- ÁTOMO: Botón "volver arriba" (aparece al hacer scroll) -->
+  <button class="btn-subir" type="button" aria-label="Volver arriba">
+    <svg class="btn-subir__icono" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
